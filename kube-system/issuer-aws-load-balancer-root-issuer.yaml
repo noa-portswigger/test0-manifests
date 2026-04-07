@@ -1,0 +1,13 @@
+# Source: aws-load-balancer-controller
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: aws-load-balancer-root-issuer
+  namespace: kube-system
+  labels:
+    app.kubernetes.io/name: aws-load-balancer-controller
+    app.kubernetes.io/instance: aws-load-balancer-controller
+    app.kubernetes.io/version: v3.1.0
+spec:
+  ca:
+    secretName: aws-load-balancer-root-cert

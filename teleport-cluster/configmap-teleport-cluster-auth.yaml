@@ -1,0 +1,272 @@
+# Source: teleport-cluster
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: teleport-cluster-auth
+  namespace: teleport-cluster
+  labels:
+    app.kubernetes.io/name: teleport-cluster
+    app.kubernetes.io/instance: teleport-cluster
+    app.kubernetes.io/component: auth
+    app.kubernetes.io/version: 18.7.3
+    teleport.dev/majorVersion: '18'
+data:
+  apply-on-startup.yaml: |
+    ---
+    kind: token
+    version: v2
+    metadata:
+      name: teleport-cluster-proxy
+      expires: "2050-01-01T00:00:00Z"
+    spec:
+      roles: [Proxy]
+      join_method: kubernetes
+      kubernetes:
+        allow:
+          - service_account: "teleport-cluster:teleport-cluster-proxy"
+    ---
+    kind: role
+    metadata:
+      description: Automatically generated role for bot operator
+      labels:
+        teleport.internal/bot: operator
+      name: bot-operator
+    spec:
+      allow:
+        impersonate:
+          roles:
+            - operator
+        rules:
+          - resources:
+              - cert_authority
+            verbs:
+              - readnosecrets
+      deny: {}
+    version: v7
+    ---
+    kind: user
+    metadata:
+      labels:
+        teleport.internal/bot: operator
+      name: bot-operator
+    spec:
+      roles:
+        - bot-operator
+    version: v2
+    ---
+    kind: role
+    metadata:
+      name: operator
+    spec:
+      allow:
+        # The operator role can see all nodes.
+        # This is required to reconcile OpenSSH and OpenSSHEICE nodes.
+        # However, it has no login set, so it cannot SSH on them
+        node_labels:
+          "*": ["*"]
+        app_labels:
+          "*": ["*"]
+        db_labels:
+          "*": ["*"]
+        rules:
+          - resources:
+              - role
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - user
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - auth_connector
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - login_rule
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - token
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - okta_import_rule
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - access_list
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - node
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - trusted_cluster
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - bot
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - workload_identity
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - app
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - autoupdate_version
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - autoupdate_config
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - db
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - inference_model
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - inference_policy
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - inference_secret
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - access_monitoring_rule
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+      deny: {}
+    version: v7
+    ---
+    kind: token
+    version: v2
+    metadata:
+      name: "teleport-operator"
+    spec:
+      roles: [Bot]
+      join_method: kubernetes
+      bot_name: operator
+      kubernetes:
+        allow:
+          - service_account: "teleport-cluster:teleport-cluster-operator"
+  teleport.yaml: |
+    auth_service:
+      authentication:
+        local_auth: true
+        second_factors:
+        - otp
+        - webauthn
+        type: local
+        webauthn:
+          rp_id: test0.aws.noa.re
+      cluster_name: test0.aws.noa.re
+      enabled: true
+      proxy_listener_mode: separate
+    kubernetes_service:
+      enabled: true
+      kube_cluster_name: test0.aws.noa.re
+      listen_addr: 0.0.0.0:3026
+      public_addr: teleport-cluster-auth.teleport-cluster.svc.cluster.local:3026
+    proxy_service:
+      enabled: false
+    ssh_service:
+      enabled: false
+    teleport:
+      auth_server: 127.0.0.1:3025
+      log:
+        format:
+          extra_fields:
+          - timestamp
+          - level
+          - component
+          - caller
+          output: text
+        output: stderr
+        severity: INFO
+    version: v3

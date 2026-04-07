@@ -1,0 +1,101 @@
+# Source: teleport-cluster
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: teleport-cluster-operator
+  namespace: teleport-cluster
+  labels:
+    app.kubernetes.io/name: operator
+    app.kubernetes.io/instance: teleport-cluster
+    app.kubernetes.io/component: operator
+    app.kubernetes.io/version: 18.7.3
+    teleport.dev/majorVersion: '18'
+    teleport.dev/release: teleport-cluster_teleport-cluster
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: operator
+      app.kubernetes.io/instance: teleport-cluster
+      app.kubernetes.io/component: operator
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: operator
+        app.kubernetes.io/instance: teleport-cluster
+        app.kubernetes.io/component: operator
+        app.kubernetes.io/version: 18.7.3
+        teleport.dev/majorVersion: '18'
+        teleport.dev/release: teleport-cluster_teleport-cluster
+    spec:
+      containers:
+      - name: operator
+        image: public.ecr.aws/gravitational/teleport-operator:18.7.3
+        imagePullPolicy: IfNotPresent
+        command:
+        - /teleport-operator
+        - -auth-server
+        - teleport-cluster-auth.teleport-cluster.svc.cluster.local:3025
+        - -join-method
+        - kubernetes
+        - -token
+        - teleport-operator
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8081
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8081
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        ports:
+        - name: op-metrics
+          containerPort: 8080
+          protocol: TCP
+        - name: op-health
+          containerPort: 8081
+          protocol: TCP
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: operator-serviceaccount-token
+          readOnly: true
+      automountServiceAccountToken: false
+      volumes:
+      - name: operator-serviceaccount-token
+        projected:
+          sources:
+          - serviceAccountToken:
+              path: token
+          - configMap:
+              items:
+              - key: ca.crt
+                path: ca.crt
+              name: kube-root-ca.crt
+          - downwardAPI:
+              items:
+              - path: namespace
+                fieldRef:
+                  fieldPath: metadata.namespace
+      securityContext:
+        fsGroup: 65532
+        runAsGroup: 65532
+        runAsNonRoot: true
+        runAsUser: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccountName: teleport-cluster-operator
