@@ -99,6 +99,8 @@ spec:
           value: '0'
         - name: IGNORE_DRA_REQUESTS
           value: 'true'
+        - name: AWS_REGION
+          value: eu-west-2
         ports:
         - name: http-metrics
           containerPort: 8080
