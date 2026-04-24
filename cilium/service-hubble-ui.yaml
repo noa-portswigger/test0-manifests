@@ -4,6 +4,8 @@ apiVersion: v1
 metadata:
   name: hubble-ui
   namespace: cilium
+  annotations:
+    teleport.dev/name: hubble
   labels:
     k8s-app: hubble-ui
     app.kubernetes.io/name: hubble-ui
