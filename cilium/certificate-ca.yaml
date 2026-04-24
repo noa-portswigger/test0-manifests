@@ -1,0 +1,16 @@
+# Source: cilium
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ca
+  namespace: cilium
+spec:
+  duration: 175200h
+  isCA: true
+  issuerRef:
+    name: ca
+  privateKey:
+    algorithm: ECDSA
+    rotationPolicy: Always
+  secretName: ca-tls
+  commonName: ca-cert

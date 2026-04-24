@@ -6,7 +6,7 @@ metadata:
   namespace: cilium
 spec:
   issuerRef:
-    name: aws-load-balancer-root-issuer
+    name: leaf
   secretName: hubble-server-certs
   commonName: '*.default.hubble-grpc.cilium.io'
   dnsNames:
