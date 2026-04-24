@@ -1,0 +1,21 @@
+# Source: karpenter
+apiVersion: karpenter.k8s.aws/v1
+kind: EC2NodeClass
+metadata:
+  name: default
+  namespace: karpenter
+spec:
+  amiSelectorTerms:
+  - alias: bottlerocket@v1.57.0
+  metadataOptions:
+    httpEndpoint: enabled
+    httpProtocolIPv6: disabled
+    httpPutResponseHopLimit: 1
+    httpTokens: required
+  role: test0-node-role
+  securityGroupSelectorTerms:
+  - tags:
+      karpenter.sh/discovery: test0
+  subnetSelectorTerms:
+  - tags:
+      karpenter.sh/discovery: test0
