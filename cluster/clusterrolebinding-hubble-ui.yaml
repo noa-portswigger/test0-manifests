@@ -12,4 +12,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: hubble-ui
-  namespace: kube-system
+  namespace: cilium

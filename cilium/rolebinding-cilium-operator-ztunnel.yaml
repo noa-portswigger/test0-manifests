@@ -2,15 +2,15 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: cilium-config-agent
-  namespace: kube-system
+  name: cilium-operator-ztunnel
+  namespace: cilium
   labels:
     app.kubernetes.io/part-of: cilium
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: cilium-config-agent
+  name: cilium-operator-ztunnel
 subjects:
 - kind: ServiceAccount
-  name: cilium
-  namespace: kube-system
+  name: cilium-operator
+  namespace: cilium

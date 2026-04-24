@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: cilium-envoy
-  namespace: kube-system
+  namespace: cilium
   labels:
     k8s-app: cilium-envoy
     app.kubernetes.io/part-of: cilium
