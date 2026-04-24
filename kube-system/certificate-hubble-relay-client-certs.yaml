@@ -6,9 +6,7 @@ metadata:
   namespace: kube-system
 spec:
   issuerRef:
-    group: cert-manager.io
-    kind: Issuer
-    name: aws-load-balancer-selfsigned-issuer
+    name: aws-load-balancer-root-issuer
   secretName: hubble-relay-client-certs
   commonName: '*.hubble-relay.cilium.io'
   dnsNames:
