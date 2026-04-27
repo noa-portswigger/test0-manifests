@@ -51,6 +51,7 @@ data:
   auto-create-cilium-node-resource: 'true'
   ec2-api-endpoint: ''
   eni-tags: '{}'
+  eni-subnet-tags: karpenter.sh/discovery=test0
   enable-l7-proxy: 'true'
   enable-ipv4-masquerade: 'false'
   enable-ipv4-big-tcp: 'false'
