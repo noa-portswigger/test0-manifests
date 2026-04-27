@@ -1,9 +1,0 @@
-# Source: cilium
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: leaf
-  namespace: cilium
-spec:
-  ca:
-    secretName: ca-tls
