@@ -51,7 +51,6 @@ data:
   auto-create-cilium-node-resource: 'true'
   ec2-api-endpoint: ''
   eni-tags: '{}'
-  eni-subnet-tags: karpenter.sh/discovery=test0
   enable-l7-proxy: 'true'
   enable-ipv4-masquerade: 'false'
   enable-ipv4-big-tcp: 'false'
@@ -65,7 +64,8 @@ data:
   iptables-random-fully: 'false'
   auto-direct-node-routes: 'false'
   direct-routing-skip-unreachable: 'false'
-  kube-proxy-replacement: 'false'
+  kube-proxy-replacement: 'true'
+  kube-proxy-replacement-healthz-bind-address: ''
   enable-no-service-endpoints-routable: 'true'
   bpf-lb-sock: 'false'
   nodeport-addresses: ''
