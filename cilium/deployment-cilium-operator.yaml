@@ -78,6 +78,10 @@ spec:
               name: cilium-aws
               key: AWS_DEFAULT_REGION
               optional: true
+        - name: KUBERNETES_SERVICE_HOST
+          value: 2961CCEC6DA8CB74729DA4CC35C660FC.gr7.eu-west-2.eks.amazonaws.com
+        - name: KUBERNETES_SERVICE_PORT
+          value: '443'
         ports:
         - name: health
           containerPort: 9234
