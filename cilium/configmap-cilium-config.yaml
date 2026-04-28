@@ -49,6 +49,7 @@ data:
   policy-deny-response: none
   enable-endpoint-routes: 'true'
   auto-create-cilium-node-resource: 'true'
+  aws-enable-prefix-delegation: 'true'
   ec2-api-endpoint: ''
   eni-tags: '{}'
   enable-l7-proxy: 'true'
