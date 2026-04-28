@@ -82,7 +82,7 @@ spec:
               apiVersion: v1
               fieldPath: metadata.namespace
         - name: KUBERNETES_SERVICE_HOST
-          value: 18DBD906D18D791EE7B14005F52CF8BF.gr7.eu-west-2.eks.amazonaws.com
+          value: 058FE1E454B013230972F274A3EA3AA7.gr7.eu-west-2.eks.amazonaws.com
         - name: KUBERNETES_SERVICE_PORT
           value: '443'
         ports:

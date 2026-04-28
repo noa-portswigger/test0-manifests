@@ -36,10 +36,10 @@ spec:
           type: RuntimeDefault
       containers:
       - name: cilium-operator
-        image: quay.io/cilium/operator-generic:v1.19.3@sha256:205b09b0ed6accbf9fe688d312a9f0fcfc6a316fc081c23fbffb472af5dd62cd
+        image: quay.io/cilium/operator-aws:v1.19.3@sha256:a53dcbfb77282bf2ddd3abbe60f6d49762e7c1389a36cb35b71d504644a56640
         imagePullPolicy: IfNotPresent
         command:
-        - cilium-operator-generic
+        - cilium-operator-aws
         args:
         - --config-dir=/tmp/cilium/config-map
         - --debug=$(CILIUM_DEBUG)
@@ -60,8 +60,26 @@ spec:
               key: debug
               name: cilium-config
               optional: true
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: cilium-aws
+              key: AWS_ACCESS_KEY_ID
+              optional: true
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: cilium-aws
+              key: AWS_SECRET_ACCESS_KEY
+              optional: true
+        - name: AWS_DEFAULT_REGION
+          valueFrom:
+            secretKeyRef:
+              name: cilium-aws
+              key: AWS_DEFAULT_REGION
+              optional: true
         - name: KUBERNETES_SERVICE_HOST
-          value: 18DBD906D18D791EE7B14005F52CF8BF.gr7.eu-west-2.eks.amazonaws.com
+          value: 058FE1E454B013230972F274A3EA3AA7.gr7.eu-west-2.eks.amazonaws.com
         - name: KUBERNETES_SERVICE_PORT
           value: '443'
         ports:
