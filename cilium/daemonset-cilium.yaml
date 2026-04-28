@@ -98,7 +98,7 @@ spec:
               resource: limits.memory
               divisor: '1'
         - name: KUBERNETES_SERVICE_HOST
-          value: 2961CCEC6DA8CB74729DA4CC35C660FC.gr7.eu-west-2.eks.amazonaws.com
+          value: 18DBD906D18D791EE7B14005F52CF8BF.gr7.eu-west-2.eks.amazonaws.com
         - name: KUBERNETES_SERVICE_PORT
           value: '443'
         - name: KUBE_CLIENT_BACKOFF_BASE
@@ -216,7 +216,7 @@ spec:
               apiVersion: v1
               fieldPath: metadata.namespace
         - name: KUBERNETES_SERVICE_HOST
-          value: 2961CCEC6DA8CB74729DA4CC35C660FC.gr7.eu-west-2.eks.amazonaws.com
+          value: 18DBD906D18D791EE7B14005F52CF8BF.gr7.eu-west-2.eks.amazonaws.com
         - name: KUBERNETES_SERVICE_PORT
           value: '443'
         volumeMounts:
@@ -332,7 +332,7 @@ spec:
               key: write-cni-conf-when-ready
               optional: true
         - name: KUBERNETES_SERVICE_HOST
-          value: 2961CCEC6DA8CB74729DA4CC35C660FC.gr7.eu-west-2.eks.amazonaws.com
+          value: 18DBD906D18D791EE7B14005F52CF8BF.gr7.eu-west-2.eks.amazonaws.com
         - name: KUBERNETES_SERVICE_PORT
           value: '443'
         terminationMessagePolicy: FallbackToLogsOnError
