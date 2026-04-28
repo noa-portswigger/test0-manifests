@@ -20,11 +20,7 @@ data:
       - cert_file: /etc/teleport-tls/tls.crt
         key_file: /etc/teleport-tls/tls.key
       https_keypairs_reload_interval: 12h
-      kube_listen_addr: 0.0.0.0:3026
-      listen_addr: 0.0.0.0:3023
-      mysql_listen_addr: 0.0.0.0:3036
       public_addr: test0.aws.noa.re:443
-      tunnel_listen_addr: 0.0.0.0:3024
     ssh_service:
       enabled: false
     teleport:

@@ -23,7 +23,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: b5d88bfa935402753dfc38afb2ec447999a96fbb63b017587d5a1559efdc1457
+        checksum/config: 71a8b57f6f3e75349050060a28f0cb568a07e72fd844883d26eda67ea5f64af6
       labels:
         app.kubernetes.io/name: teleport-cluster
         app.kubernetes.io/instance: teleport-cluster

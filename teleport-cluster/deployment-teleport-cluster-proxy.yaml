@@ -21,7 +21,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: c26c728236806eee775bba7cfcac7e8f74cd89db69d1454a6d71507a030a5285
+        checksum/config: c8b69b6fa9d2c2a37d316631da150d35006dfa3a15765b718f7d53ef949fcc02
       labels:
         app.kubernetes.io/name: teleport-cluster
         app.kubernetes.io/instance: teleport-cluster
@@ -77,18 +77,6 @@ spec:
         ports:
         - name: tls
           containerPort: 3080
-          protocol: TCP
-        - name: sshproxy
-          containerPort: 3023
-          protocol: TCP
-        - name: sshtun
-          containerPort: 3024
-          protocol: TCP
-        - name: kube
-          containerPort: 3026
-          protocol: TCP
-        - name: mysql
-          containerPort: 3036
           protocol: TCP
         - name: diag
           containerPort: 3000
