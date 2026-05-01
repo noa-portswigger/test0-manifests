@@ -16,7 +16,7 @@ spec:
       labels:
         app: idcat
       annotations:
-        checksum/config: 72cf5e3d9bb9ee15446dd80d5cee5629083549509a66fa41473309ec8300e437
+        checksum/config: 07421389a9064593e855a00e881472000c4cb3889d01ef944c221dc159d1786a
     spec:
       serviceAccountName: idcat
       containers:
