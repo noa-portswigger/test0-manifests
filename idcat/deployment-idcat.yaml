@@ -1,0 +1,31 @@
+# Source: idcat
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: idcat
+  labels:
+    app: idcat
+  namespace: idcat
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: idcat
+  template:
+    metadata:
+      labels:
+        app: idcat
+      annotations:
+        checksum/config: 72cf5e3d9bb9ee15446dd80d5cee5629083549509a66fa41473309ec8300e437
+    spec:
+      serviceAccountName: idcat
+      containers:
+      - name: idcat
+        image: nresare/idcat:latest
+        volumeMounts:
+        - name: idcat-config
+          mountPath: /config
+      volumes:
+      - name: idcat-config
+        configMap:
+          name: idcat-config
