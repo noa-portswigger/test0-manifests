@@ -7,7 +7,7 @@ metadata:
   labels:
     app.kubernetes.io/name: aws-load-balancer-controller
     app.kubernetes.io/instance: aws-load-balancer-controller
-    app.kubernetes.io/version: v3.1.0
+    app.kubernetes.io/version: v3.2.2
 spec:
   ca:
     secretName: aws-load-balancer-root-cert

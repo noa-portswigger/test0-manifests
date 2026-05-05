@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: external-dns
     app.kubernetes.io/instance: external-dns
-    app.kubernetes.io/version: 0.16.1
+    app.kubernetes.io/version: 0.21.0
 rules:
 - apiGroups:
   - ''
@@ -27,7 +27,14 @@ rules:
   - ''
   resources:
   - services
-  - endpoints
+  verbs:
+  - get
+  - watch
+  - list
+- apiGroups:
+  - discovery.k8s.io
+  resources:
+  - endpointslices
   verbs:
   - get
   - watch

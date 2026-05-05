@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: aws-load-balancer-controller
     app.kubernetes.io/instance: aws-load-balancer-controller
-    app.kubernetes.io/version: v3.1.0
+    app.kubernetes.io/version: v3.2.2
 rules:
 - apiGroups:
   - elbv2.k8s.aws
@@ -183,6 +183,7 @@ rules:
   - tcproutes
   - tlsroutes
   - udproutes
+  - listenersets
   verbs:
   - get
   - list
@@ -195,6 +196,7 @@ rules:
   - tcproutes/finalizers
   - tlsroutes/finalizers
   - udproutes/finalizers
+  - listenersets/finalizers
   verbs:
   - update
 - apiGroups:
@@ -205,6 +207,7 @@ rules:
   - tcproutes/status
   - tlsroutes/status
   - udproutes/status
+  - listenersets/status
   verbs:
   - get
   - patch
