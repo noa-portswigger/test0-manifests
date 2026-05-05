@@ -9,23 +9,24 @@ metadata:
     app.kubernetes.io/version: 18.7.6
     teleport.dev/majorVersion: '18'
     teleport.dev/release: teleport-cluster_teleport-cluster
-  name: teleportbotsv1.resources.teleport.dev
+  name: teleportscopedroleassignmentsv1.resources.teleport.dev
 spec:
   group: resources.teleport.dev
   names:
-    kind: TeleportBotV1
-    listKind: TeleportBotV1List
-    plural: teleportbotsv1
+    kind: TeleportScopedRoleAssignmentV1
+    listKind: TeleportScopedRoleAssignmentV1List
+    plural: teleportscopedroleassignmentsv1
     shortNames:
-    - botv1
-    - botsv1
-    singular: teleportbotv1
+    - scopedroleassignmentv1
+    - scopedroleassignmentsv1
+    singular: teleportscopedroleassignmentv1
   scope: Namespaced
   versions:
   - name: v1
     schema:
       openAPIV3Schema:
-        description: BotV1 is the Schema for the botsv1 API
+        description: ScopedRoleAssignmentV1 is the Schema for the scopedroleassignmentsv1
+          API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -39,43 +40,41 @@ spec:
             type: string
           metadata:
             type: object
+          scope:
+            description: Scope is the scope of the role assignment resource.
+            type: string
           spec:
-            description: Bot resource definition v1 from Teleport
+            description: ScopedRoleAssignment resource definition v1 from Teleport
             properties:
-              max_session_ttl:
-                description: The max session TTL value for the bot's internal role.
-                  Unless specified, bots may not request a value beyond the default
-                  maximum TTL of 12 hours. This value may not be larger than 7 days
-                  (168 hours).  Cannot be set for a scoped Bot.
-                format: duration
-                type: string
-              roles:
-                description: The roles that the bot should be able to impersonate.  Cannot
-                  be set for a scoped Bot.
-                items:
-                  type: string
-                nullable: true
-                type: array
-              traits:
-                description: The traits that will be associated with the bot for the
-                  purposes of role templating.  Where multiple specified with the
-                  same name, these will be merged by the server.  Cannot be set for
-                  a scoped Bot.
+              assignments:
+                description: Assignments is a list of individual role @ scope assignments.
                 items:
                   properties:
-                    name:
-                      description: The name of the trait. This is what allows the
-                        trait to be queried in role templates.
+                    role:
+                      description: Roles is the name of the role that is assigned
+                        by this assignment.
                       type: string
-                    values:
-                      description: The values associated with the named trait.
-                      items:
-                        type: string
-                      nullable: true
-                      type: array
+                    scope:
+                      description: Scope is the scope to which the role is assigned.
+                        This must be a member/child of the scope of the [ScopedRoleAssignment]
+                        in which this assignment is contained.
+                      type: string
                   type: object
                 nullable: true
                 type: array
+              bot_name:
+                description: Name of the Bot to whom all contained assignments apply.
+                  Mutually exclusive with `user`.
+                type: string
+              bot_scope:
+                description: Scope of the Bot to whom all contained assignments apply.
+                  Required if `bot_name` is set. If specified, assignment scopes must
+                  be equal or descendent of this scope.
+                type: string
+              user:
+                description: User is the user to whom all contained assignments apply.
+                  Mutually exclusive with `bot_name`.
+                type: string
             type: object
           status:
             description: Status defines the observed state of the Teleport resource

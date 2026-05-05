@@ -2,12 +2,11 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  creationTimestamp: null
   labels:
     app.kubernetes.io/component: operator
     app.kubernetes.io/instance: teleport-cluster
     app.kubernetes.io/name: operator
-    app.kubernetes.io/version: 18.7.3
+    app.kubernetes.io/version: 18.7.6
     teleport.dev/majorVersion: '18'
     teleport.dev/release: teleport-cluster_teleport-cluster
   name: teleportappsv3.resources.teleport.dev
@@ -126,27 +125,24 @@ spec:
                     type: integer
                 type: object
               dynamic_labels:
+                additionalProperties:
+                  nullable: true
+                  properties:
+                    command:
+                      description: Command is a command to run
+                      items:
+                        type: string
+                      nullable: true
+                      type: array
+                    period:
+                      description: Period is a time between command runs
+                      format: duration
+                      type: string
+                    result:
+                      description: Result captures standard output
+                      type: string
+                  type: object
                 description: DynamicLabels are the app's command labels.
-                properties:
-                  key:
-                    type: string
-                  value:
-                    nullable: true
-                    properties:
-                      command:
-                        description: Command is a command to run
-                        items:
-                          type: string
-                        nullable: true
-                        type: array
-                      period:
-                        description: Period is a time between command runs
-                        format: duration
-                        type: string
-                      result:
-                        description: Result captures standard output
-                        type: string
-                    type: object
                 type: object
               identity_center:
                 description: IdentityCenter encapsulates information specific to AWS

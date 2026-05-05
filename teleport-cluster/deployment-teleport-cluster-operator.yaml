@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: operator
     app.kubernetes.io/instance: teleport-cluster
     app.kubernetes.io/component: operator
-    app.kubernetes.io/version: 18.7.3
+    app.kubernetes.io/version: 18.7.6
     teleport.dev/majorVersion: '18'
     teleport.dev/release: teleport-cluster_teleport-cluster
 spec:
@@ -29,13 +29,13 @@ spec:
         app.kubernetes.io/name: operator
         app.kubernetes.io/instance: teleport-cluster
         app.kubernetes.io/component: operator
-        app.kubernetes.io/version: 18.7.3
+        app.kubernetes.io/version: 18.7.6
         teleport.dev/majorVersion: '18'
         teleport.dev/release: teleport-cluster_teleport-cluster
     spec:
       containers:
       - name: operator
-        image: public.ecr.aws/gravitational/teleport-operator:18.7.3
+        image: public.ecr.aws/gravitational/teleport-operator:18.7.6
         imagePullPolicy: IfNotPresent
         command:
         - /teleport-operator

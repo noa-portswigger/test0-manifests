@@ -2,12 +2,11 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  creationTimestamp: null
   labels:
     app.kubernetes.io/component: operator
     app.kubernetes.io/instance: teleport-cluster
     app.kubernetes.io/name: operator
-    app.kubernetes.io/version: 18.7.3
+    app.kubernetes.io/version: 18.7.6
     teleport.dev/majorVersion: '18'
     teleport.dev/release: teleport-cluster_teleport-cluster
   name: teleportaccesslists.resources.teleport.dev
@@ -90,10 +89,23 @@ spec:
                 nullable: true
                 properties:
                   roles:
-                    description: roles are the roles that are granted to users who
-                      are members of the Access List.
+                    description: roles are the names of roles to be granted to users.
                     items:
                       type: string
+                    nullable: true
+                    type: array
+                  scoped_roles:
+                    description: scoped_roles are scoped roles to be granted to users.
+                    items:
+                      properties:
+                        role:
+                          description: role is the name of the scoped role to be granted.
+                          type: string
+                        scope:
+                          description: scope is the scope the role will be assigned
+                            at. It must be an assignable scope of the role.
+                          type: string
+                      type: object
                     nullable: true
                     type: array
                   traits:
@@ -101,8 +113,7 @@ spec:
                       items:
                         type: string
                       type: array
-                    description: traits are the traits that are granted to users who
-                      are members of the Access List.
+                    description: traits are the traits to be granted to users.
                     type: object
                 type: object
               membership_requires:
@@ -134,10 +145,23 @@ spec:
                 nullable: true
                 properties:
                   roles:
-                    description: roles are the roles that are granted to users who
-                      are members of the Access List.
+                    description: roles are the names of roles to be granted to users.
                     items:
                       type: string
+                    nullable: true
+                    type: array
+                  scoped_roles:
+                    description: scoped_roles are scoped roles to be granted to users.
+                    items:
+                      properties:
+                        role:
+                          description: role is the name of the scoped role to be granted.
+                          type: string
+                        scope:
+                          description: scope is the scope the role will be assigned
+                            at. It must be an assignable scope of the role.
+                          type: string
+                      type: object
                     nullable: true
                     type: array
                   traits:
@@ -145,8 +169,7 @@ spec:
                       items:
                         type: string
                       type: array
-                    description: traits are the traits that are granted to users who
-                      are members of the Access List.
+                    description: traits are the traits to be granted to users.
                     type: object
                 type: object
               owners:

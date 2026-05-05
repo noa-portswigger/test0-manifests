@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: teleport-cluster
     app.kubernetes.io/instance: teleport-cluster
     app.kubernetes.io/component: auth
-    app.kubernetes.io/version: 18.7.3
+    app.kubernetes.io/version: 18.7.6
     teleport.dev/majorVersion: '18'
 data:
   apply-on-startup.yaml: |
@@ -87,6 +87,22 @@ data:
               - delete
           - resources:
               - auth_connector
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - saml_idp_service_provider
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - lock
             verbs:
               - list
               - create
@@ -215,6 +231,30 @@ data:
               - delete
           - resources:
               - access_monitoring_rule
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - scoped_token
+            verbs:
+              - list
+              - create
+              - read
+              - update
+              - delete
+          - resources:
+              - scoped_role
+            verbs:
+              - list
+              - create
+              - readnosecrets
+              - update
+              - delete
+          - resources:
+              - scoped_role_assignment
             verbs:
               - list
               - create

@@ -2,12 +2,11 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  creationTimestamp: null
   labels:
     app.kubernetes.io/component: operator
     app.kubernetes.io/instance: teleport-cluster
     app.kubernetes.io/name: operator
-    app.kubernetes.io/version: 18.7.3
+    app.kubernetes.io/version: 18.7.6
     teleport.dev/majorVersion: '18'
     teleport.dev/release: teleport-cluster_teleport-cluster
   name: teleportopensshserversv2.resources.teleport.dev
@@ -113,15 +112,12 @@ spec:
                 description: Hostname is server hostname
                 type: string
               immutable_labels:
+                additionalProperties:
+                  type: string
                 description: The immutable labels assigned to the server when joining.
                   The hash of these labels is expected to match the hash included
                   in the server's certificate.
                 nullable: true
-                properties:
-                  key:
-                    type: string
-                  value:
-                    type: string
                 type: object
               peer_addr:
                 description: PeerAddr is the address a proxy server is reachable at

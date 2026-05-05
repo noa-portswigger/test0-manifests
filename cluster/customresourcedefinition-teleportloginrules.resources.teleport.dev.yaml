@@ -2,12 +2,11 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  creationTimestamp: null
   labels:
     app.kubernetes.io/component: operator
     app.kubernetes.io/instance: teleport-cluster
     app.kubernetes.io/name: operator
-    app.kubernetes.io/version: 18.7.3
+    app.kubernetes.io/version: 18.7.6
     teleport.dev/majorVersion: '18'
     teleport.dev/release: teleport-cluster_teleport-cluster
   name: teleportloginrules.resources.teleport.dev
@@ -57,6 +56,7 @@ spec:
                 additionalProperties:
                   items:
                     type: string
+                  nullable: true
                   type: array
                 description: TraitsMap is a map of trait keys to lists of predicate
                   expressions which should evaluate to the desired values for that

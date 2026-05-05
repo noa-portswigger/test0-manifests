@@ -2,12 +2,11 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  creationTimestamp: null
   labels:
     app.kubernetes.io/component: operator
     app.kubernetes.io/instance: teleport-cluster
     app.kubernetes.io/name: operator
-    app.kubernetes.io/version: 18.7.3
+    app.kubernetes.io/version: 18.7.6
     teleport.dev/majorVersion: '18'
     teleport.dev/release: teleport-cluster_teleport-cluster
   name: teleportprovisiontokens.resources.teleport.dev
@@ -109,6 +108,8 @@ spec:
                           nullable: true
                           type: array
                         subscription:
+                          type: string
+                        tenant:
                           type: string
                       type: object
                     nullable: true
@@ -324,6 +325,10 @@ spec:
                     items:
                       properties:
                         actor:
+                          type: string
+                        enterprise:
+                          type: string
+                        enterprise_id:
                           type: string
                         environment:
                           type: string
