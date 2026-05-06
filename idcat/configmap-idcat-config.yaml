@@ -5,7 +5,7 @@ metadata:
   name: idcat-config
   namespace: idcat
 data:
-  idcat.toml: |+
+  idcat.toml: |
     bind_address = "0.0.0.0:8080"
     key_source = "kms"
 
@@ -21,5 +21,3 @@ data:
     [[installation]]
     github_app = "SwigApp"
     required_claims = { "sub" = "system:serviceaccount:default:default" }
-
-...
