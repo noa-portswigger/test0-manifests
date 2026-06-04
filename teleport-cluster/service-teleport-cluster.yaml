@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: teleport-cluster
     app.kubernetes.io/instance: teleport-cluster
     app.kubernetes.io/component: proxy
-    app.kubernetes.io/version: 18.7.6
+    app.kubernetes.io/version: 18.8.2
     teleport.dev/majorVersion: '18'
   annotations:
     external-dns.alpha.kubernetes.io/hostname: '*.test0.aws.noa.re,test0.aws.noa.re'
@@ -17,6 +17,7 @@ metadata:
     service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
     service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
     service.beta.kubernetes.io/aws-load-balancer-type: external
+    noa.re/deploy-id: 54fbbbd7973f40ab
 spec:
   type: LoadBalancer
   ports:

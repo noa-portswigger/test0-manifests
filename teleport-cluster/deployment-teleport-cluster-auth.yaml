@@ -8,9 +8,11 @@ metadata:
     app.kubernetes.io/name: teleport-cluster
     app.kubernetes.io/instance: teleport-cluster
     app.kubernetes.io/component: auth
-    app.kubernetes.io/version: 18.7.6
+    app.kubernetes.io/version: 18.8.2
     teleport.dev/majorVersion: '18'
     app: teleport-cluster
+  annotations:
+    noa.re/deploy-id: 54fbbbd7973f40ab
 spec:
   replicas: 1
   strategy:
@@ -23,12 +25,12 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: b1905f72b49cb764ecbf76a7220133f5c679d281b88c62de746d048dc4ad2f46
+        checksum/config: 1c3a14cb0e6acb1bb51033236f1a97b35e7c8f700bd96d36d2df7f0cc86243b4
       labels:
         app.kubernetes.io/name: teleport-cluster
         app.kubernetes.io/instance: teleport-cluster
         app.kubernetes.io/component: auth
-        app.kubernetes.io/version: 18.7.6
+        app.kubernetes.io/version: 18.8.2
         teleport.dev/majorVersion: '18'
         app: teleport-cluster
     spec:
@@ -65,7 +67,7 @@ spec:
             topologyKey: kubernetes.io/hostname
       containers:
       - name: teleport
-        image: public.ecr.aws/gravitational/teleport-distroless:18.7.6
+        image: public.ecr.aws/gravitational/teleport-distroless:18.8.2
         imagePullPolicy: IfNotPresent
         args:
         - --diag-addr=0.0.0.0:3000

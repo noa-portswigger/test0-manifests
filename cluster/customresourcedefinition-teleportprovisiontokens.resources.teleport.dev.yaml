@@ -6,10 +6,12 @@ metadata:
     app.kubernetes.io/component: operator
     app.kubernetes.io/instance: teleport-cluster
     app.kubernetes.io/name: operator
-    app.kubernetes.io/version: 18.7.6
+    app.kubernetes.io/version: 18.8.2
     teleport.dev/majorVersion: '18'
     teleport.dev/release: teleport-cluster_teleport-cluster
   name: teleportprovisiontokens.resources.teleport.dev
+  annotations:
+    noa.re/deploy-id: 54fbbbd7973f40ab
 spec:
   group: resources.teleport.dev
   names:
@@ -452,6 +454,10 @@ spec:
                     items:
                       properties:
                         service_account:
+                          type: string
+                        service_account_name:
+                          type: string
+                        service_account_namespace:
                           type: string
                       type: object
                     nullable: true

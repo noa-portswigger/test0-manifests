@@ -9,26 +9,25 @@ metadata:
     app.kubernetes.io/version: 18.8.2
     teleport.dev/majorVersion: '18'
     teleport.dev/release: teleport-cluster_teleport-cluster
-  name: teleportautoupdateconfigsv1.resources.teleport.dev
+  name: teleportretrievalmodelsv1.resources.teleport.dev
   annotations:
     noa.re/deploy-id: 54fbbbd7973f40ab
 spec:
   group: resources.teleport.dev
   names:
-    kind: TeleportAutoupdateConfigV1
-    listKind: TeleportAutoupdateConfigV1List
-    plural: teleportautoupdateconfigsv1
+    kind: TeleportRetrievalModelV1
+    listKind: TeleportRetrievalModelV1List
+    plural: teleportretrievalmodelsv1
     shortNames:
-    - autoupdateconfigv1
-    - autoupdateconfigsv1
-    singular: teleportautoupdateconfigv1
+    - retrievalmodelv1
+    - retrievalmodelsv1
+    singular: teleportretrievalmodelv1
   scope: Namespaced
   versions:
   - name: v1
     schema:
       openAPIV3Schema:
-        description: AutoupdateConfigV1 is the Schema for the autoupdateconfigsv1
-          API
+        description: RetrievalModelV1 is the Schema for the retrievalmodelsv1 API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -43,77 +42,60 @@ spec:
           metadata:
             type: object
           spec:
-            description: AutoupdateConfig resource definition v1 from Teleport
+            description: RetrievalModel resource definition v1 from Teleport
             properties:
-              agents:
+              bedrock:
+                description: Bedrock indicates that this model uses Amazon Bedrock
+                  as the embeddings provider and specifies Bedrock-specific parameters.
                 nullable: true
                 properties:
-                  maintenance_window_duration:
-                    description: maintenance_window_duration is the maintenance window
-                      duration. This can only be set if `strategy` is "time-based".
-                      Once the window is over, the group transitions to the done state.
-                      Existing agents won't be updated until the next maintenance
-                      window.
-                    format: duration
+                  bedrock_model_id:
+                    description: BedrockModelId specifies a model ID or an inference
+                      profile as understood by the Bedrock API.
                     type: string
-                  mode:
-                    description: mode specifies whether agent autoupdates are enabled,
-                      disabled, or paused.
+                  integration:
+                    description: Integration is the AWS OIDC Integration name. If
+                      unset, Teleport will use AWS credentials available on the Auth
+                      Service machine; otherwise, it will use the specified OIDC integration
+                      for assuming appropriate role.
                     type: string
-                  schedules:
-                    description: schedules specifies schedules for updates of grouped
-                      agents.
-                    nullable: true
-                    properties:
-                      regular:
-                        description: regular schedules for non-critical versions.
-                        items:
-                          properties:
-                            canary_count:
-                              description: canary_count is the number of canary agents
-                                that will be updated before the whole group is updated.
-                                when set to 0, the group does not enter the canary
-                                phase. This number is capped to 5. This number must
-                                always be lower than the total number of agents in
-                                the group, else the rollout will be stuck.
-                              format: int32
-                              type: integer
-                            days:
-                              description: days when the update can run. Supported
-                                values are "Mon", "Tue", "Wed", "Thu", "Fri", "Sat",
-                                "Sun" and "*"
-                              items:
-                                type: string
-                              nullable: true
-                              type: array
-                            name:
-                              description: name of the group
-                              type: string
-                            start_hour:
-                              description: start_hour to initiate update
-                              format: int32
-                              type: integer
-                            wait_hours:
-                              description: wait_hours after last group succeeds before
-                                this group can run. This can only be used when the
-                                strategy is "halt-on-failure". This field must be
-                                positive.
-                              format: int32
-                              type: integer
-                          type: object
-                        nullable: true
-                        type: array
-                    type: object
-                  strategy:
-                    description: strategy to use for updating the agents.
+                  region:
+                    description: Region is the AWS region which will be used for inference.
                     type: string
+                  temperature:
+                    description: Temperature controls the randomness of the model's
+                      output.
+                    type: number
                 type: object
-              tools:
+              inference_model_name:
+                description: inference_model_name is the name of the model used to
+                  convert natural language search queries into API requests and generate
+                  prose from a session summary.
+                type: string
+              openai:
+                description: Openai indicates that this model uses OpenAI as the embeddings
+                  provider and specifies OpenAI-specific parameters.
                 nullable: true
                 properties:
-                  mode:
-                    description: Mode defines state of the client tools auto update.
+                  api_key_secret_ref:
+                    description: ApiKeySecretRef is a reference to an InferenceSecret
+                      that contains the OpenAI API key.
                     type: string
+                  base_url:
+                    description: BaseUrl is the OpenAI API base URL. Optional, defaults
+                      to the public OpenAI API URL. May be used to point to a custom
+                      OpenAI-compatible API, such as LiteLLM. In such case, the `api_key_secret_ref`
+                      must point to a secret that contains the API key for that custom
+                      API.
+                    type: string
+                  openai_model_id:
+                    description: OpenaiModelId specifies the model ID, as understood
+                      by the OpenAI API.
+                    type: string
+                  temperature:
+                    description: Temperature controls the randomness of the model's
+                      output.
+                    type: number
                 type: object
             type: object
           status:
@@ -182,6 +164,9 @@ spec:
                 type: integer
             type: object
         type: object
+        x-kubernetes-validations:
+        - message: resource must be named "retrieval-model"
+          rule: self.metadata.name == "retrieval-model"
     served: true
     storage: true
     subresources:
