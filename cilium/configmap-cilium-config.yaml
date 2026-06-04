@@ -4,6 +4,8 @@ kind: ConfigMap
 metadata:
   name: cilium-config
   namespace: cilium
+  annotations:
+    noa.re/deploy-id: 59220790755d6302
 data:
   identity-allocation-mode: crd
   identity-heartbeat-timeout: 30m0s
@@ -11,10 +13,8 @@ data:
   cilium-endpoint-gc-interval: 5m0s
   nodes-gc-interval: 5m0s
   debug: 'false'
-  debug-verbose: ''
   metrics-sampling-interval: 5m
   enable-policy: default
-  policy-cidr-match-mode: ''
   operator-prometheus-serve-addr: :9963
   enable-metrics: 'true'
   enable-policy-secrets-sync: 'true'
@@ -69,7 +69,6 @@ data:
   kube-proxy-replacement-healthz-bind-address: ''
   enable-no-service-endpoints-routable: 'true'
   bpf-lb-sock: 'false'
-  nodeport-addresses: ''
   enable-health-check-nodeport: 'true'
   enable-health-check-loadbalancer-ip: 'false'
   node-port-bind-protection: 'true'

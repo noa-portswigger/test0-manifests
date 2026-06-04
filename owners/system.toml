@@ -1,0 +1,1 @@
+owned = ["argo", "cert-manager", "cilium", "cilium-secrets", "cluster", "external-dns", "karpenter", "kube-system", "teleport", "teleport-cluster"]

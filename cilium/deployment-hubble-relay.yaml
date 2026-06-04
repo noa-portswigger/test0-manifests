@@ -8,6 +8,8 @@ metadata:
     k8s-app: hubble-relay
     app.kubernetes.io/name: hubble-relay
     app.kubernetes.io/part-of: cilium
+  annotations:
+    noa.re/deploy-id: 59220790755d6302
 spec:
   replicas: 1
   selector:
@@ -41,7 +43,7 @@ spec:
           runAsUser: 65532
           seccompProfile:
             type: RuntimeDefault
-        image: quay.io/cilium/hubble-relay:v1.19.3@sha256:5ee21d57b6ef2aa6db67e603a735fdceb162454b352b7335b651456e308f681b
+        image: quay.io/cilium/hubble-relay:v1.19.4@sha256:59af8c0d561e560c2a042e7600a3496bc0367df8fbf868aa68d5834c8ec1a431
         imagePullPolicy: IfNotPresent
         command:
         - hubble-relay

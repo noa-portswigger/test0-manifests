@@ -9,6 +9,8 @@ metadata:
     name: cilium-operator
     app.kubernetes.io/part-of: cilium
     app.kubernetes.io/name: cilium-operator
+  annotations:
+    noa.re/deploy-id: 59220790755d6302
 spec:
   replicas: 2
   selector:
@@ -36,7 +38,7 @@ spec:
           type: RuntimeDefault
       containers:
       - name: cilium-operator
-        image: quay.io/cilium/operator-aws:v1.19.3@sha256:a53dcbfb77282bf2ddd3abbe60f6d49762e7c1389a36cb35b71d504644a56640
+        image: quay.io/cilium/operator-aws:v1.19.4@sha256:9e41b3959d941a0b60ba187f5a2572305846248efb89ac59c18fd25a032f568d
         imagePullPolicy: IfNotPresent
         command:
         - cilium-operator-aws

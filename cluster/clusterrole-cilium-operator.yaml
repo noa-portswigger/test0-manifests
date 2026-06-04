@@ -5,6 +5,8 @@ metadata:
   name: cilium-operator
   labels:
     app.kubernetes.io/part-of: cilium
+  annotations:
+    noa.re/deploy-id: 59220790755d6302
 rules:
 - apiGroups:
   - ''
@@ -188,6 +190,7 @@ rules:
   resources:
   - ciliumloadbalancerippools
   - ciliumpodippools
+  - ciliumbgppeeringpolicies
   - ciliumbgpclusterconfigs
   - ciliumbgpnodeconfigoverrides
   - ciliumbgppeerconfigs

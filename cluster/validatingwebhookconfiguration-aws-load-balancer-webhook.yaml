@@ -4,6 +4,7 @@ kind: ValidatingWebhookConfiguration
 metadata:
   annotations:
     cert-manager.io/inject-ca-from: kube-system/aws-load-balancer-serving-cert
+    noa.re/deploy-id: 59220790755d6302
   name: aws-load-balancer-webhook
   labels:
     app.kubernetes.io/name: aws-load-balancer-controller
@@ -64,8 +65,6 @@ webhooks:
   failurePolicy: Fail
   matchPolicy: Equivalent
   name: vingress.elbv2.k8s.aws
-  objectSelector: null
-  namespaceSelector: null
   admissionReviewVersions:
   - v1beta1
   rules:

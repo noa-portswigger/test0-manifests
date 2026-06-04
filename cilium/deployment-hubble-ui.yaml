@@ -8,6 +8,8 @@ metadata:
     k8s-app: hubble-ui
     app.kubernetes.io/name: hubble-ui
     app.kubernetes.io/part-of: cilium
+  annotations:
+    noa.re/deploy-id: 59220790755d6302
 spec:
   replicas: 1
   selector:
@@ -34,7 +36,7 @@ spec:
       automountServiceAccountToken: true
       containers:
       - name: frontend
-        image: quay.io/cilium/hubble-ui:v0.13.3@sha256:661d5de7050182d495c6497ff0b007a7a1e379648e60830dd68c4d78ae21761d
+        image: quay.io/cilium/hubble-ui:v0.13.5@sha256:f7d514fc54d784ed6df9d58cf0e97648b143f92b766dd1780ed3fc845bd4c516
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
@@ -57,7 +59,7 @@ spec:
         securityContext:
           allowPrivilegeEscalation: false
       - name: backend
-        image: quay.io/cilium/hubble-ui-backend:v0.13.3@sha256:db1454e45dc39ca41fbf7cad31eec95d99e5b9949c39daaad0fa81ef29d56953
+        image: quay.io/cilium/hubble-ui-backend:v0.13.5@sha256:fac0c300ae119274edca11fd89b1ad23c788792d8bc4ea2ba631c709e8d3c688
         imagePullPolicy: IfNotPresent
         env:
         - name: EVENTS_SERVER_PORT
