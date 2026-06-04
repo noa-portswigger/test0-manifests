@@ -7,7 +7,9 @@ metadata:
   labels:
     app.kubernetes.io/name: aws-load-balancer-controller
     app.kubernetes.io/instance: aws-load-balancer-controller
-    app.kubernetes.io/version: v3.2.2
+    app.kubernetes.io/version: v3.4.0
+  annotations:
+    noa.re/deploy-id: 73aa0832e5744305
 spec:
   replicas: 2
   revisionHistoryLimit: 10
@@ -42,7 +44,7 @@ spec:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
           runAsNonRoot: true
-        image: public.ecr.aws/eks/aws-load-balancer-controller:v3.2.2
+        image: public.ecr.aws/eks/aws-load-balancer-controller:v3.4.0
         imagePullPolicy: IfNotPresent
         volumeMounts:
         - mountPath: /tmp/k8s-webhook-server/serving-certs

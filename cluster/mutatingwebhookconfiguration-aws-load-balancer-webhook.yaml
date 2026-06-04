@@ -4,11 +4,12 @@ kind: MutatingWebhookConfiguration
 metadata:
   annotations:
     cert-manager.io/inject-ca-from: kube-system/aws-load-balancer-serving-cert
+    noa.re/deploy-id: 73aa0832e5744305
   name: aws-load-balancer-webhook
   labels:
     app.kubernetes.io/name: aws-load-balancer-controller
     app.kubernetes.io/instance: aws-load-balancer-controller
-    app.kubernetes.io/version: v3.2.2
+    app.kubernetes.io/version: v3.4.0
 webhooks:
 - clientConfig:
     service:
@@ -18,7 +19,7 @@ webhooks:
   failurePolicy: Ignore
   name: mpod.elbv2.k8s.aws
   admissionReviewVersions:
-  - v1beta1
+  - v1
   namespaceSelector:
     matchExpressions:
     - key: elbv2.k8s.aws/pod-readiness-gate-inject
@@ -49,7 +50,7 @@ webhooks:
   failurePolicy: Fail
   name: quicid.elbv2.k8s.aws
   admissionReviewVersions:
-  - v1beta1
+  - v1
   namespaceSelector:
     matchExpressions:
     - key: elbv2.k8s.aws/quic-server-id-inject
@@ -80,7 +81,7 @@ webhooks:
   failurePolicy: Fail
   name: mservice.elbv2.k8s.aws
   admissionReviewVersions:
-  - v1beta1
+  - v1
   objectSelector:
     matchExpressions:
     - key: app.kubernetes.io/name
@@ -105,7 +106,7 @@ webhooks:
   failurePolicy: Fail
   name: alb-target-control.namespace.elbv2.k8s.aws
   admissionReviewVersions:
-  - v1beta1
+  - v1
   namespaceSelector:
     matchExpressions:
     - key: elbv2.k8s.aws/alb-target-control-agent-injection
@@ -140,7 +141,7 @@ webhooks:
   failurePolicy: Fail
   name: alb-target-control.object.elbv2.k8s.aws
   admissionReviewVersions:
-  - v1beta1
+  - v1
   namespaceSelector:
     matchExpressions:
     - key: elbv2.k8s.aws/alb-target-control-agent-injection
@@ -173,7 +174,7 @@ webhooks:
   failurePolicy: Fail
   name: mtargetgroupbinding.elbv2.k8s.aws
   admissionReviewVersions:
-  - v1beta1
+  - v1
   rules:
   - apiGroups:
     - elbv2.k8s.aws

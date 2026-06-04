@@ -4,12 +4,12 @@ kind: ValidatingWebhookConfiguration
 metadata:
   annotations:
     cert-manager.io/inject-ca-from: kube-system/aws-load-balancer-serving-cert
-    noa.re/deploy-id: 59220790755d6302
+    noa.re/deploy-id: 73aa0832e5744305
   name: aws-load-balancer-webhook
   labels:
     app.kubernetes.io/name: aws-load-balancer-controller
     app.kubernetes.io/instance: aws-load-balancer-controller
-    app.kubernetes.io/version: v3.2.2
+    app.kubernetes.io/version: v3.4.0
 webhooks:
 - clientConfig:
     service:
@@ -19,7 +19,7 @@ webhooks:
   failurePolicy: Fail
   name: vingressclassparams.elbv2.k8s.aws
   admissionReviewVersions:
-  - v1beta1
+  - v1
   objectSelector:
     matchExpressions:
     - key: app.kubernetes.io/name
@@ -45,7 +45,7 @@ webhooks:
   failurePolicy: Fail
   name: vtargetgroupbinding.elbv2.k8s.aws
   admissionReviewVersions:
-  - v1beta1
+  - v1
   rules:
   - apiGroups:
     - elbv2.k8s.aws
@@ -66,7 +66,7 @@ webhooks:
   matchPolicy: Equivalent
   name: vingress.elbv2.k8s.aws
   admissionReviewVersions:
-  - v1beta1
+  - v1
   rules:
   - apiGroups:
     - networking.k8s.io

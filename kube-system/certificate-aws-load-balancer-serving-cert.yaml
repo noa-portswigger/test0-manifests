@@ -7,7 +7,9 @@ metadata:
   labels:
     app.kubernetes.io/name: aws-load-balancer-controller
     app.kubernetes.io/instance: aws-load-balancer-controller
-    app.kubernetes.io/version: v3.2.2
+    app.kubernetes.io/version: v3.4.0
+  annotations:
+    noa.re/deploy-id: 73aa0832e5744305
 spec:
   dnsNames:
   - aws-load-balancer-webhook-service.kube-system.svc
