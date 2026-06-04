@@ -6,7 +6,9 @@ metadata:
   labels:
     app.kubernetes.io/name: karpenter
     app.kubernetes.io/instance: karpenter
-    app.kubernetes.io/version: 1.12.0
+    app.kubernetes.io/version: 1.12.1
+  annotations:
+    noa.re/deploy-id: d15a73d9723e4e62
 rules:
 - apiGroups:
   - karpenter.sh

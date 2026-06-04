@@ -7,7 +7,9 @@ metadata:
   labels:
     app.kubernetes.io/name: karpenter
     app.kubernetes.io/instance: karpenter
-    app.kubernetes.io/version: 1.12.0
+    app.kubernetes.io/version: 1.12.1
+  annotations:
+    noa.re/deploy-id: d15a73d9723e4e62
 spec:
   replicas: 2
   revisionHistoryLimit: 10
@@ -46,7 +48,7 @@ spec:
           capabilities:
             drop:
             - ALL
-        image: public.ecr.aws/karpenter/controller:1.12.0@sha256:8128bc8cdd0cc8ca2d2cf68ec61033eceb8cfb24834a08ab278784924013cfd0
+        image: public.ecr.aws/karpenter/controller:1.12.1@sha256:61c1872a00f6eb4ba89d830d359d4c61757d0239a89ecfb748d609a9a81ea1f2
         imagePullPolicy: IfNotPresent
         env:
         - name: KUBERNETES_MIN_VERSION
