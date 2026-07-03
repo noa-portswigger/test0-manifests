@@ -1,0 +1,24 @@
+# Source: echo
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo
+  labels:
+    app.kubernetes.io/name: echo
+  namespace: echo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: echo
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: echo
+    spec:
+      containers:
+      - name: echo
+        image: mendhak/http-https-echo:31
+        ports:
+        - name: http
+          containerPort: 8080
