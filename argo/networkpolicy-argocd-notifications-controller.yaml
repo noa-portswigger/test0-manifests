@@ -1,8 +1,8 @@
 # Source: argocd
-apiVersion: v1
-kind: ConfigMap
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
 metadata:
-  name: argocd-notifications-cm
+  name: argocd-notifications-controller
   namespace: argo
   labels:
     app.kubernetes.io/name: argocd-notifications-controller
@@ -12,6 +12,15 @@ metadata:
     app.kubernetes.io/version: v3.5.1
   annotations:
     noa.re/deploy-id: ed85da0dd5c363d0
-data:
-  context: |
-    argocdUrl: https://argo.test0.aws.noa.re
+spec:
+  ingress:
+  - from:
+    - namespaceSelector: {}
+    ports:
+    - port: metrics
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: argocd-notifications-controller
+      app.kubernetes.io/instance: argocd
+  policyTypes:
+  - Ingress

@@ -9,9 +9,9 @@ metadata:
     app.kubernetes.io/instance: argocd
     app.kubernetes.io/component: repo-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.4.3
+    app.kubernetes.io/version: v3.5.1
   annotations:
-    noa.re/deploy-id: bd91a8db8fa1d64b
+    noa.re/deploy-id: ed85da0dd5c363d0
 spec:
   replicas: 1
   revisionHistoryLimit: 3
@@ -22,21 +22,21 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cmd-params: 75e708a799d59ffe05199f6b80b579df79a1943275815a023d6ea1543ad1ebdc
-        checksum/cm: ea7bd6bfeb7487cd827a50b085e7401e020bfc0603b0dadf7877835c28567ef4
+        checksum/cmd-params: 557e3d13f82bd3d1487a5b8c548ca2c465809023f9e33f33397ecc7193b10244
+        checksum/cm: 53e2afa23a8a77fab915c864d45ba27374cee8286ecde2cbc2d37ea0e9c57a28
       labels:
         app.kubernetes.io/name: argocd-repo-server
         app.kubernetes.io/instance: argocd
         app.kubernetes.io/component: repo-server
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: v3.4.3
+        app.kubernetes.io/version: v3.5.1
     spec:
       terminationGracePeriodSeconds: 30
       serviceAccountName: argocd-repo-server
       automountServiceAccountToken: true
       containers:
       - name: repo-server
-        image: quay.io/argoproj/argocd:v3.4.3
+        image: quay.io/argoproj/argocd:v3.5.1
         imagePullPolicy: IfNotPresent
         args:
         - /usr/local/bin/argocd-repo-server
@@ -362,7 +362,7 @@ spec:
         args:
         - /bin/cp --update=none /usr/local/bin/argocd /var/run/argocd/argocd && /bin/ln
           -sf /var/run/argocd/argocd /var/run/argocd/argocd-cmp-server
-        image: quay.io/argoproj/argocd:v3.4.3
+        image: quay.io/argoproj/argocd:v3.5.1
         imagePullPolicy: IfNotPresent
         name: copyutil
         resources: {}
