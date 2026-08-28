@@ -5,12 +5,13 @@ metadata:
   name: hubble-ui
   labels:
     app.kubernetes.io/part-of: cilium
+  annotations:
+    noa.re/deploy-id: dbff30fb5542399a
 rules:
 - apiGroups:
   - ''
   resources:
   - componentstatuses
-  - endpoints
   - namespaces
   - nodes
   - pods

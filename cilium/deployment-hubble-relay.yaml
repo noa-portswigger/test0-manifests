@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/name: hubble-relay
     app.kubernetes.io/part-of: cilium
   annotations:
-    noa.re/deploy-id: 59220790755d6302
+    noa.re/deploy-id: dbff30fb5542399a
 spec:
   replicas: 1
   selector:
@@ -38,12 +38,13 @@ spec:
           capabilities:
             drop:
             - ALL
+          readOnlyRootFilesystem: true
           runAsGroup: 65532
           runAsNonRoot: true
           runAsUser: 65532
           seccompProfile:
             type: RuntimeDefault
-        image: quay.io/cilium/hubble-relay:v1.19.4@sha256:59af8c0d561e560c2a042e7600a3496bc0367df8fbf868aa68d5834c8ec1a431
+        image: quay.io/cilium/hubble-relay:v1.20.1@sha256:59be0ae7d475ab9011a5e954618c0f27b5778b17140381425b308b55ba4917f4
         imagePullPolicy: IfNotPresent
         command:
         - hubble-relay
@@ -70,6 +71,8 @@ spec:
           failureThreshold: 20
           periodSeconds: 3
         volumeMounts:
+        - name: tmp-volume
+          mountPath: /tmp
         - name: config
           mountPath: /etc/hubble-relay
           readOnly: true
@@ -92,6 +95,8 @@ spec:
       nodeSelector:
         kubernetes.io/os: linux
       volumes:
+      - name: tmp-volume
+        emptyDir: {}
       - name: config
         configMap:
           name: hubble-relay-config

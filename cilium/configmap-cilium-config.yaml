@@ -5,7 +5,7 @@ metadata:
   name: cilium-config
   namespace: cilium
   annotations:
-    noa.re/deploy-id: 59220790755d6302
+    noa.re/deploy-id: dbff30fb5542399a
 data:
   identity-allocation-mode: crd
   identity-heartbeat-timeout: 30m0s
@@ -65,11 +65,14 @@ data:
   iptables-random-fully: 'false'
   auto-direct-node-routes: 'false'
   direct-routing-skip-unreachable: 'false'
+  enable-host-firewall: 'false'
+  devices: ''
   kube-proxy-replacement: 'true'
   kube-proxy-replacement-healthz-bind-address: ''
   enable-no-service-endpoints-routable: 'true'
   bpf-lb-sock: 'false'
   enable-health-check-nodeport: 'true'
+  enable-dynamic-source-lookup-nodeport: 'false'
   enable-health-check-loadbalancer-ip: 'false'
   node-port-bind-protection: 'true'
   enable-auto-protect-node-port-range: 'true'
@@ -142,18 +145,23 @@ data:
   proxy-max-concurrent-retries: '128'
   proxy-use-original-source-address: 'true'
   proxy-cluster-max-connections: '1024'
+  proxy-cluster-max-pending-requests: '1024'
   proxy-cluster-max-requests: '1024'
   http-retry-count: '3'
   http-stream-idle-timeout: '300'
+  envoy-node-locality-enabled: 'false'
   external-envoy-proxy: 'true'
   envoy-base-id: '0'
+  envoy-access-log-enabled: 'true'
   envoy-access-log-buffer-size: '4096'
   envoy-keep-cap-netbindservice: 'false'
+  envoy-xds-mode: ads
   max-connected-clusters: '255'
   clustermesh-cache-ttl: 0s
   clustermesh-enable-endpoint-sync: 'false'
   clustermesh-enable-mcs-api: 'false'
   clustermesh-mcs-api-install-crds: 'true'
+  clustermesh-default-global-namespace: 'true'
   policy-default-local-cluster: 'true'
   nat-map-stats-entries: '32'
   nat-map-stats-interval: 30s
@@ -162,3 +170,5 @@ data:
   enable-source-ip-verification: 'true'
   enable-dynamic-config: 'true'
   enable-drift-checker: 'true'
+  enable-datapath-plugins: 'false'
+  datapath-plugins-state-dir: /var/run/cilium/plugins

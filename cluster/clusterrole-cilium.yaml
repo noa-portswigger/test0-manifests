@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/part-of: cilium
   annotations:
-    noa.re/deploy-id: 59220790755d6302
+    noa.re/deploy-id: dbff30fb5542399a
 rules:
 - apiGroups:
   - networking.k8s.io
@@ -30,7 +30,6 @@ rules:
   - namespaces
   - services
   - pods
-  - endpoints
   - nodes
   verbs:
   - get
@@ -48,7 +47,6 @@ rules:
   - cilium.io
   resources:
   - ciliumloadbalancerippools
-  - ciliumbgppeeringpolicies
   - ciliumbgpnodeconfigs
   - ciliumbgpadvertisements
   - ciliumbgppeerconfigs
@@ -66,6 +64,7 @@ rules:
   - ciliumcidrgroups
   - ciliuml2announcementpolicies
   - ciliumpodippools
+  - ciliumdatapathplugins
   verbs:
   - list
   - watch
